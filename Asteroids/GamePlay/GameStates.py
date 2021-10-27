@@ -220,6 +220,9 @@ class Gamestates():
         """the state after the main loop where you insert your score"""
 
         SPAWNALIEN = pygame.USEREVENT + 4
+        SHARPMOVE = pygame.USEREVENT + 1
+        STOP = pygame.USEREVENT + 2
+        SHOOT = pygame.USEREVENT + 3
 
         user_text = ''
         input_rect = pygame.Rect(680, 650, 350, 250)
@@ -253,6 +256,9 @@ class Gamestates():
                 self.game.player.kill()
                 self.game.player = Player()
                 pygame.time.set_timer(SPAWNALIEN, 0)
+                pygame.time.set_timer(SHARPMOVE, 0)
+                pygame.time.set_timer(STOP, 0)
+                pygame.time.set_timer(SHOOT, 0)
 
                 #blit the insert score image (easier that gaussian blurring text)
                 image = pygame.image.load(os.path.join(os.path.dirname(__file__), 'insertscore.jpg')).convert()

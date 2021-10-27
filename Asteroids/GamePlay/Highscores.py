@@ -17,10 +17,18 @@ def append_dict(fulldict):
         f.seek(0) #may not be fully necessary, but help reset the file
         f.write(str(fulldict))
 
+def highest_score(score, text, fulldict):
+    old_score = fulldict.get(text, 0)
+    if score > old_score:
+        return score
+    else:
+        return old_score
+
 def add_to_highscores(score, text):
     """adds the new highscore to the dictionary"""
     fulldict = get_dict()
-    fulldict[text] = score #sets new the dictionary object format
+    new_score = highest_score(score, text, fulldict)
+    fulldict[text] = new_score #sets new the dictionary object format
     #sorts the dictionary into reverse order. The sort creates tuples, but we need to turn them back into a dictionary.
     #hense the {x:y for x, y} stuff
     sorted_dict = {x: y for x, y in sorted(fulldict.items(), key=lambda item: item[1], reverse=True)}
